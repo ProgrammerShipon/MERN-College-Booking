@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosCall from "./useAxiosCall";
 import useUserAuth from "./useUserAuth";
 
-const useThreeClg = () => {
+const useThreeClgSingle = () => {
 	const { axiosCall } = useAxiosCall();
 	const { authLoading } = useUserAuth();
 
@@ -15,6 +15,7 @@ const useThreeClg = () => {
 		enabled: !authLoading,
 		queryFn: async () => {
 			const res = await axiosCall("/three-college");
+			console.log("three clg res -> ", res);
 			return res.data;
 		},
 	});
@@ -22,4 +23,4 @@ const useThreeClg = () => {
 	return { threeCLg, threeClgLoading, threeClgRefetch };
 };
 
-export default useThreeClg;
+export default useThreeClgSingle;

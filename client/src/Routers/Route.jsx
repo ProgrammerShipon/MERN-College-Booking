@@ -7,6 +7,8 @@ import Colleges from "../Pages/Colleges/Colleges";
 import Admission from "../Pages/Admission/Admission";
 import MyCollege from "../Pages/MyCollege/MyCollege";
 import NotFoundPage from "../Pages/ErrorPage/404";
+import TDetails from "../Pages/Home/ThreeClg/TDetails";
+import useAxiosCall from "../hooks/useAxiosCall";
 
 const Route = createBrowserRouter([
 	{
@@ -37,6 +39,12 @@ const Route = createBrowserRouter([
 			{
 				path: "/profile",
 				element: <UserProfile />,
+			},
+			{
+				path: "/three-college/:id",
+				loader: ({ params }) =>
+					fetch(`http://localhost:6060/three-college/${params?.id}`),
+				element: <TDetails />,
 			},
 		],
 	},
