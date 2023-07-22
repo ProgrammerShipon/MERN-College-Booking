@@ -6,8 +6,6 @@ const Login = () => {
 	const { authLoading, user } = useUserAuth();
 	const navigate = useNavigate();
 
-	console.log("login page -> ", authLoading, user);
-
 	!authLoading && user?.email && navigate("/profile");
 
 	return (
