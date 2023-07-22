@@ -1,8 +1,12 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Header = () => {
+	const { user, logOut } = useContext(AuthContext);
+
 	const navData = [
 		{
 			path: "/",
@@ -51,11 +55,19 @@ const Header = () => {
 						{navItems}
 					</nav>
 
-					<button className="">
-						<div className="md:ml-3 w-12 h-12 transition duration-300 bg-slate-200 hover:bg-slate-300 shadow-md rounded-full flex justify-center items-center">
-							@
-						</div>
-					</button>
+					<div className="">
+						{user ? (
+							<button className="md:ml-3 w-12 h-12 transition duration-300 bg-slate-200 hover:bg-slate-300 shadow-md rounded-full flex justify-center items-center">
+								@
+							</button>
+						) : (
+							<Link to="/login">
+								<button className="md:ml-3 py-3 px-4 transition duration-300 bg-slate-200 hover:bg-slate-300 shadow-md rounded-md  flex justify-center items-center">
+									Login
+								</button>
+							</Link>
+						)}
+					</div>
 				</div>
 			</header>
 		</>
