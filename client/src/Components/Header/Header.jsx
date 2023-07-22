@@ -49,8 +49,7 @@ const Header = () => {
 				Profile{" "}
 			</Link>
 			<button className={userItemStyle} onClick={() => logOutHandle()}>
-				{" "}
-				Logout{" "}
+				Logout
 			</button>
 		</>
 	);

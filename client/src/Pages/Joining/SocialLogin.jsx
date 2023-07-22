@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa6";
+import { toast } from "react-hot-toast";
 
 const SocialLogin = () => {
 	const { user, googleLogin, logOut } = useContext(AuthContext);
@@ -9,7 +10,10 @@ const SocialLogin = () => {
 	const googleHandle = () => {
 		console.log("google Handle");
 		googleLogin()
-			.then((result) => console.log("User Login -> ", result))
+			.then((result) => {
+				toast.success("Google Login Success");
+				console.log("User Login -> ", result);
+			})
 			.catch((err) => console.log(err.message));
 	};
 
