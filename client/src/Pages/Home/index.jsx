@@ -1,10 +1,11 @@
 import React from "react";
+import ThreeClg from "./ThreeClg/ThreeClg";
 
 const Home = () => {
 	return (
-		<div>
-			<h1> This is Home Page </h1>
-		</div>
+		<>
+			<ThreeClg />
+		</>
 	);
 };
 
