@@ -42,125 +42,63 @@ const threeCollege = db.collection("threeCollege");
 const colleges = db.collection("colleges");
 const galleryImage = db.collection("galleryImage");
 const researchedPaper = db.collection("researchedPaper");
+const collegeFeedback = db.collection("collegeFeedback");
 
 // Manual Data Insert JSON data
 const data = [
 	{
-		title: "The Impact of Climate Change on Biodiversity",
-		authors: [
-			{
-				name: "Shipon Hossen",
-				image:
-					"https://media.licdn.com/dms/image/D5603AQEiYjv2IVUnSg/profile-displayphoto-shrink_800_800/0/1688882807815?e=2147483647&v=beta&t=FbE3UxaaaayNQzajxQw8-5LEOLAvp4slooG-bqutoPc",
-			},
-			{
-				name: "Sumon Ali",
-				image:
-					"https://fiverr-res.cloudinary.com/t_profile_original,q_auto,f_auto/attachments/profile/photo/dccef04a4ee6680882c9dbe0b79eb0e9-1658314807373/11e9a13c-f3c3-4ff5-af42-b674a03fd790.jpg",
-			},
-		],
-		abstract:
-			"This research paper explores the consequences of climate change on various ecosystems and the implications for biodiversity conservation.",
-		link: "https://www.climatechange.environment.nsw.gov.au/biodiversity#:~:text=Many%20impacts%20of%20climate%20change,and%20changes%20in%20farming%20productivity.",
-		date: "2023-06-15",
+		college_name: "University of XYZ",
+		reviewer_name: "John Doe",
+		review_date: "July 15, 2023",
+		rating: 4,
+		review_title: "Great Academics, Lively Campus",
+		review_content:
+			"I had an amazing experience at the University of XYZ! The academics were top-notch, and the professors were knowledgeable and supportive. The campus life was vibrant, with plenty of clubs and events to get involved in.",
 	},
 	{
-		title:
-			"Artificial Intelligence in Healthcare: Current Trends and Future Prospects",
-		authors: [
-			{
-				name: "Tajibul islam Shohan",
-				image:
-					"https://scontent.fdac138-2.fna.fbcdn.net/v/t39.30808-6/300416571_1911376365736742_9071875675321240673_n.jpg?stp=dst-jpg_p526x296&_nc_cat=102&ccb=1-7&_nc_sid=174925&_nc_eui2=AeEYWvKSiGkmrS_LLgHptGKCBkzjHjXebv8GTOMeNd5u_0D7pudKKzSfRj7wsNd_TfY-XjZ9q_X4tszI_lHJJq1P&_nc_ohc=TI9Y_R6tbwMAX-qpJb_&_nc_ht=scontent.fdac138-2.fna&oh=00_AfCFuOUNbKcIwN49eh04upMw8Mfz6UUGJdq88KkRlsCX-Q&oe=64C0ED18",
-			},
-			{
-				name: "Shipon Hossen Raju",
-				image:
-					"https://media.licdn.com/dms/image/D5603AQEiYjv2IVUnSg/profile-displayphoto-shrink_800_800/0/1688882807815?e=2147483647&v=beta&t=FbE3UxaaaayNQzajxQw8-5LEOLAvp4slooG-bqutoPc",
-			},
-		],
-		abstract:
-			"This paper discusses the applications of artificial intelligence in the healthcare industry, including diagnosis, treatment, and patient care.",
-		link: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5819974/",
-		date: "2023-07-03",
+		college_name: "ABC College",
+		reviewer_name: "Jane Smith",
+		review_date: "July 20, 2023",
+		rating: 3,
+		review_title: "Beautiful Campus, Lackluster Facilities",
+		review_content:
+			"ABC College has a beautiful campus with lush greenery, but I was disappointed with the facilities. The dorms were outdated, and some classrooms lacked proper equipment. The professors were generally good, but the administration could improve their responsiveness to student concerns.",
 	},
 	{
-		title:
-			"Understanding the Psychological Effects of Social Media Usage among Adolescents",
-		authors: [
-			{
-				name: "Jessica Williams",
-				image:
-					"https://media.licdn.com/dms/image/C4D03AQGUGGjd2UIJbA/profile-displayphoto-shrink_800_800/0/1646145793444?e=2147483647&v=beta&t=Pcc-YEq5MqXcf7gI1kzdDRVfP2jAF-7DzVUWfv33mMw",
-			},
-			{
-				name: "David Rodriguez",
-				image:
-					"https://variety.com/wp-content/uploads/2020/11/david-rodriguez.jpg",
-			},
-		],
-		abstract:
-			"This study investigates the psychological impact of excessive social media use on adolescents' mental well-being and social behavior.",
-		link: "https://www.frontiersin.org/articles/10.3389/fpsyg.2020.01949/full",
-		date: "2023-07-10",
+		college_name: "XYZ Institute of Technology",
+		reviewer_name: "Sarah Johnson",
+		review_date: "July 18, 2023",
+		rating: 5,
+		review_title: "Outstanding Engineering Program",
+		review_content:
+			"As an engineering student, I can confidently say that XYZ Institute of Technology offers one of the best engineering programs in the country. The faculty is highly knowledgeable, and the hands-on projects prepared me well for real-world challenges.",
 	},
 	{
-		title: "The Role of Renewable Energy in Sustainable Development",
-		authors: [
-			{
-				name: "Emma Brown",
-				image:
-					"https://i.guim.co.uk/img/media/6151d2e0fbef792c9d0e0d9c25f1c5753fb148c5/72_8_618_371/master/618.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=e92df2f67f0aecf51d1a17d8cd29d61a",
-			},
-			{
-				name: "James Miller",
-				image:
-					"https://www.belfercenter.org/sites/default/files/styles/headshot_large_265x265_/public/images/person/headshot/James%20Miller%20Square.jpg?h=97c04a2e&itok=bFKKHaX9",
-			},
-		],
-		abstract:
-			"This research examines the contribution of renewable energy sources in achieving sustainable development goals and reducing carbon emissions.",
-		link: "https://timesofindia.indiatimes.com/blogs/voices/the-role-of-renewable-energy-technologies-in-sustainable-development/",
-		date: "2023-07-18",
+		college_name: "Sunshine University",
+		reviewer_name: "Michael Williams",
+		review_date: "July 22, 2023",
+		rating: 2,
+		review_title: "Disorganized Administration, Average Education",
+		review_content:
+			"My experience at Sunshine University was not as great as I had hoped. The administration seemed disorganized, and there were frequent delays in processing paperwork. The quality of education was average, and some classes felt overcrowded. ",
 	},
 	{
-		title: "Enhancing Data Security in Cloud Computing: A Comparative Analysis",
-		authors: [
-			{
-				name: "Andrew Thompson",
-				image:
-					"https://www.balsillieschool.ca/wp-content/uploads/2021/09/Andrew-Thompson-2018-credit-Tomasz-Admanski-cropped-800x800-1.jpg",
-			},
-			{
-				name: "Rachel White",
-				image:
-					"https://media.licdn.com/dms/image/D4E03AQH6fr1ZRr3uRw/profile-displayphoto-shrink_800_800/0/1665678646720?e=2147483647&v=beta&t=yBoqJlN1U-MgvWsLT-U_U-UfZeJLm9eWnytVSgDlv2M",
-			},
-		],
-		abstract:
-			"This comparative analysis evaluates various techniques to enhance data security in cloud computing environments and their effectiveness.",
-		link: "https://www.researchgate.net/publication/309618359_Enhancing_Data_Security_in_Cloud_Computing_Using_a_Lightweight_Cryptographic_Algorithm",
-		date: "2023-07-22",
+		college_name: "Arts & Design Institute",
+		reviewer_name: "Emily Lee",
+		review_date: "July 16, 2023",
+		rating: 4,
+		review_title: "Creativity and Supportive Faculty",
+		review_content:
+			"As a student of the Arts & Design Institute, I loved the creative atmosphere. The professors were not only skilled artists but also great mentors, always ready to provide feedback and encouragement. The facilities were well-equipped for artistic pursuits..",
 	},
 	{
-		title:
-			"The Influence of Parenting Styles on Academic Achievement of Children",
-		authors: [
-			{
-				name: "Jennifer Davis",
-				image:
-					"https://www.maisonchs.com/files/images/agents/d/5d8de90a-d630-488a-ba1b-144443e19366/1.jpg",
-			},
-			{
-				name: "Robert Clark",
-				image:
-					"https://upload.wikimedia.org/wikipedia/commons/7/77/Robert_T_Clark.jpg",
-			},
-		],
-		abstract:
-			"This study investigates how different parenting styles can impact the academic performance and overall development of children.",
-		link: "https://ieeexplore.ieee.org/document/7342713",
-		date: "2023-07-19",
+		college_name: "Business Academy",
+		reviewer_name: "Robert Davis",
+		review_date: "July 19, 2023",
+		rating: 3,
+		review_title: "Decent Business Program, Limited Extracurriculars",
+		review_content:
+			"The Business Academy offered a decent business program with some great professors, but I felt that it lacked a well-rounded experience. There were limited extracurricular activities related to business and entrepreneurship.",
 	},
 ];
 
@@ -171,7 +109,7 @@ const data = [
 app.get("/", async (req, res) => {
 	res.send("<h1> Assalamualaikum </h2>");
 
-	// const result = await researchedPaper.insertMany(data);
+	// const result = await collegeFeedback.insertMany(data);
 	// console.log(result);
 });
 
@@ -202,9 +140,15 @@ app.get("/gallery-image", async (req, res) => {
 	res.send(result);
 });
 
-// gallery image
+// Research Papers
 app.get("/research-papers", async (req, res) => {
 	const result = await researchedPaper.find().toArray();
+	res.send(result);
+});
+
+// College Feedback
+app.get("/college-feedback", async (req, res) => {
+	const result = await collegeFeedback.find().toArray();
 	res.send(result);
 });
 
