@@ -43,9 +43,7 @@ const Route = createBrowserRouter([
 			{
 				path: "/three-college/:id",
 				loader: ({ params }) =>
-					fetch(
-						`https://college-booking.vercel.app/three-college/${params?.id}`
-					),
+					fetch(`http://localhost:6060/three-college/${params?.id}`),
 				element: <TDetails />,
 			},
 		],
