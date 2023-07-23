@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosCall = axios.create({
-	baseURL: "http://localhost:6060/",
+	baseURL: "https://college-booking.vercel.app/",
 });
 
 const useAxiosCall = () => {

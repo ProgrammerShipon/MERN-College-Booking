@@ -1,38 +1,60 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../../Provider/AuthProvider";
+import React, { useContext, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa6";
 import { toast } from "react-hot-toast";
+import useUserAuth from "../../hooks/useUserAuth";
+import { FaGoogle } from "react-icons/fa";
 
 const SocialLogin = () => {
-	const { user, googleLogin, logOut } = useContext(AuthContext);
+	const [isError, setError] = useState("");
+	const { user, authLoading, googleLogin, githubLogin } = useUserAuth();
 
 	const googleHandle = () => {
-		console.log("google Handle");
 		googleLogin()
 			.then((result) => {
-				toast.success("Google Login Success");
-				console.log("User Login -> ", result);
+				toast("Google Login Success");
+				navigate(from, { replace: true });
 			})
-			.catch((err) => console.log(err.message));
+			.catch((error) => {
+				setError(error.message);
+			});
+	};
+
+	const githubHandle = () => {
+		githubLogin()
+			.then((result) => {
+				toast("Github Login Success");
+				navigate(from, { replace: true });
+			})
+			.catch((error) => {
+				setError(error.message);
+			});
 	};
 
 	return (
 		<>
-			<button
-				onClick={() => googleHandle()}
-				type="button"
-				className="mx-1 transition duration-300 h-12 w-12 rounded-full bg-slate-100 hover:bg-slate-300 text-white shadow-[0_4px_9px_-4px_#3b71ca]"
-			>
-				<FcGoogle className="text-3xl w-full" />
-			</button>
-
-			<button
-				type="button"
-				className="mx-1 transition duration-300 h-12 w-12 rounded-full bg-slate-100 hover:bg-slate-300 uppercase leading-normal text-gray-900 shadow-[0_4px_9px_-4px_#3b71ca]"
-			>
-				<FaGithub className="text-3xl w-full" />
-			</button>
+			<div className="bg-white mt-5 py-3 px-4 shadow sm:rounded-lg sm:px-10 max-w-md mx-auto">
+				<div className="">
+					<div className="my-5">
+						<button
+							onClick={googleHandle}
+							className="flex justify-center items-center gap-4 w-full border border-green-500 p-5 py-3 text-green-500 text-center rounded-md shadow-md hover:shadow-xl hover:scale-105 transition duration-300 cursor-pointer"
+						>
+							<FaGoogle className="w-5 h-5" />
+							<span> Continue With Google </span>
+						</button>
+					</div>
+					<div className="my-5">
+						<button
+							onClick={githubHandle}
+							className="w-full  flex justify-center items-center gap-4 border border-gray-500 p-5 py-3 text-gray-500 text-center rounded-md shadow-md hover:shadow-xl hover:scale-105  transition duration-300 cursor-pointer"
+						>
+							<FaGithub className="w-5 h-5" />
+							<span> Continue With Github </span>
+						</button>
+					</div>
+				</div>
+			</div>
 		</>
 	);
 };

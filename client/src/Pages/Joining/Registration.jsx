@@ -1,64 +1,89 @@
 import React, { useContext, useState } from "react";
+import { AuthContext } from "../../AuthProviders/AuthProvider";
+import { updateProfile } from "firebase/auth";
 import { FaEye } from "react-icons/fa";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import useUserAuth from "../../hooks/useUserAuth";
-import SocialLogin from "./SocialLogin";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-function Login() {
+const Registration = ({ fm }) => {
 	const navigate = useNavigate();
-	const location = useLocation();
-	const [isError, setError] = useState("");
+	const [error, setError] = useState(null);
 	const [showPw, setShowPw] = useState(true);
 	const [disable, setDisable] = useState(true);
-	const { authLoading, user, signIn } = useUserAuth();
+	const { registrationUser } = useContext(AuthContext);
 
-	let from = location.state?.from?.pathname || "/";
-
-	!authLoading && user && navigate(from, { replace: true });
-
-	const loginHandle = (event) => {
+	const registrationHandle = (event) => {
 		event.preventDefault();
 
 		const form = event.target;
-		const email = form.userEmail.value;
+		const name = form.fullName.value;
+		const email = form.email.value;
+		const photoUrl = form.photoUrl.value;
 		const password = form.M_password.value;
 
-		if (password.length < 5) {
-			setError(`The Password is less than 6 characters ${password.length} `);
+		if (password.length < 6) {
+			toast(`The Password is less than 6 characters ${password.length} `);
 			return;
 		}
 
-		signIn(email, password)
+		registrationUser(email, password)
 			.then((result) => {
-				setUser(result.user);
-				toast.success("Account Login Success");
-				navigate(from, { replace: true });
+				toast("Account Create Success");
+
+				const logUer = result.user;
+				const newUserData = {
+					displayName: name,
+					photoURL: photoUrl || null,
+				};
+
+				updateProfile(logUer, newUserData);
+
+				navigate("/");
+
 				form.reset();
 			})
 			.catch();
 	};
 
 	return (
-		<div className="bg-gray-300 min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+		<div className="bg-gray-100 min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
 			<div className="sm:mx-auto sm:w-full sm:max-w-md">
 				<h2 className="text-center text-3xl font-extrabold text-gray-900 uppercase">
-					Login your account
+					create a new account
 				</h2>
 				<p className="mt-2 text-center text-sm text-gray-600">
-					Or&nbsp;
-					<Link
-						to="/registration"
+					Or &nbsp;
+					<a
+						href="/login"
 						className="font-medium text-indigo-600 hover:underline hover:text-indigo-400"
 					>
-						create a new account
-					</Link>
+						Login to your account
+					</a>
 				</p>
 			</div>
 
 			<div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
 				<div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-					<form onSubmit={loginHandle} className="space-y-6">
+					<form onSubmit={registrationHandle} className="space-y-6">
+						<div>
+							<label
+								htmlFor="fullName"
+								className="block text-sm font-medium text-gray-700"
+							>
+								Full Name
+							</label>
+							<div className="mt-1">
+								<input
+									id="fullName"
+									name="fullName"
+									type="text"
+									autoComplete="FullName"
+									className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+									required
+								/>
+							</div>
+						</div>
+
 						<div>
 							<label
 								htmlFor="email"
@@ -66,13 +91,31 @@ function Login() {
 							>
 								Email address
 							</label>
-							<div className="mt-1 relative">
+							<div className="mt-1">
 								<input
 									id="email"
-									name="userEmail"
+									name="email"
 									type="email"
 									autoComplete="email"
 									required
+									className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+								/>
+							</div>
+						</div>
+
+						<div>
+							<label
+								htmlFor="photoUrl"
+								className="block text-sm font-medium text-gray-700"
+							>
+								Photo URL <small>( Optional )</small>
+							</label>
+							<div className="mt-1">
+								<input
+									id="photoUrl"
+									name="photoUrl"
+									type="text"
+									autoComplete="current-photoUrl"
 									className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 								/>
 							</div>
@@ -104,10 +147,10 @@ function Login() {
 						<div className="flex items-center justify-between">
 							<div className="flex items-center">
 								<input
+									onClick={() => setDisable(!disable)}
 									id="remember_me"
 									name="remember_me"
 									type="checkbox"
-									onClick={() => setDisable(!disable)}
 									className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
 								/>
 								<label
@@ -138,17 +181,14 @@ function Login() {
 										: "bg-indigo-600 hover:bg-indigo-700"
 								} `}
 							>
-								Sign in
+								Registration
 							</button>
 						</div>
-						<h3 className="text-red-500"> {isError} </h3>
 					</form>
 				</div>
 			</div>
-
-			<SocialLogin />
 		</div>
 	);
-}
+};
 
-export default Login;
+export default Registration;
