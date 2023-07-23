@@ -9,9 +9,15 @@ const Home = () => {
 		<>
 			<Banner />
 
+			<hr />
+
 			<ThreeClg />
 
+			<hr />
+
 			<GalleryImg />
+
+			<hr />
 
 			<ResearchPaper />
 		</>

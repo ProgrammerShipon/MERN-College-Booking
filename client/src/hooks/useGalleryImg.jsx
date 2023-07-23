@@ -11,11 +11,10 @@ const useGalleryImg = () => {
 		isLoading: galleryImgLoading,
 		refetch: galleryImgRefetch,
 	} = useQuery({
-		queryKey: ["College"],
+		queryKey: ["galleryImg"],
 		enabled: !authLoading,
 		queryFn: async () => {
 			const res = await axiosCall("/gallery-image");
-			console.log("galleryImgs res -> ", res);
 			return res.data;
 		},
 	});

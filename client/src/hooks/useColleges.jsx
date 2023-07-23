@@ -11,11 +11,10 @@ const useColleges = () => {
 		isLoading: collegeLoading,
 		refetch: collegeRefetch,
 	} = useQuery({
-		queryKey: ["College"],
+		queryKey: ["colleges"],
 		enabled: !authLoading,
 		queryFn: async () => {
 			const res = await axiosCall("/colleges");
-			console.log("colleges res -> ", res);
 			return res.data;
 		},
 	});
