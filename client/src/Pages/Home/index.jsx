@@ -3,6 +3,7 @@ import ThreeClg from "./ThreeClg/ThreeClg";
 import Banner from "./Banner/Banner";
 import GalleryImg from "./GalleryImg/GalleryImg";
 import ResearchPaper from "./ResearchPaper/ResearchPaper";
+import FeedbackClg from "./FeedbackClg/FeedbackClg";
 
 const Home = () => {
 	return (
@@ -20,6 +21,10 @@ const Home = () => {
 			<hr />
 
 			<ResearchPaper />
+
+			<hr />
+
+			<FeedbackClg />
 		</>
 	);
 };

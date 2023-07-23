@@ -11,7 +11,7 @@ const Banner = () => {
 				/>
 				<div className="relative bg-gray-900 bg-opacity-50">
 					<div className="px-4 py-24 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-						<div className="flex flex-col items-center justify-between xl:flex-row">
+						<div className="flex flex-col items-center justify-between xl:flex-row py-24">
 							<div className="text-center mx-auto space-y-6">
 								<h1 className="md:text-4xl lg:text-5xl font-bold text-slate-100 ">
 									{" "}

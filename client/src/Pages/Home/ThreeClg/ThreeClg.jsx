@@ -19,16 +19,16 @@ const ThreeClg = () => {
 							educational standards
 						</p>
 					</div>
-					<div className="flex flex-wrap -m-4">
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-5">
 						{threeCLg &&
 							threeCLg?.map((clg, i) => {
 								return (
-									<div key={i} className="p-4 lg:w-1/3 md:w-1/2 w-full ">
+									<div key={i} className="border flex flex-col justify-between">
 										<div className="h-full flex flex-col items-center bg-slate-100">
 											<img
 												alt="team"
 												className="flex-shrink-0 rounded-lg w-full h-56 object-cover object-center mb-4"
-												src="https://dummyimage.com/200x200"
+												src={clg?.image}
 											/>
 											<div className="w-full px-4">
 												<h2 className="title-font font-medium text-lg text-gray-900">
@@ -39,59 +39,59 @@ const ThreeClg = () => {
 												</h3>
 
 												<div className="">
-													<h2 className="font-bold"> Events: </h2>
+													<h2 className="font-bold mb-2 mt-3"> Events: </h2>
 													{clg?.events &&
-														clg?.events.map((event) => (
-															<div className="py-1 text-sm">
-																<h3>
+														clg?.events.map((event, j) => (
+															<span
+																key={j}
+																className="py-1 text-sm inline-block"
+															>
+																<h3 className="font-medium bg-slate-200  p-1 mr-2">
 																	{" "}
-																	<span className="font-medium">
-																		Event Name:
-																	</span>{" "}
-																	{event?.name}{" "}
+																	{event?.name},
 																</h3>
-															</div>
+															</span>
 														))}
 												</div>
 
 												<div className="">
-													<h2 className="font-bold"> Research History: </h2>
-													{clg?.researchHistory &&
-														clg?.researchHistory.map((rh) => (
-															<div className="py-1 text-sm">
-																<h3>
-																	{" "}
-																	<span className="font-medium">
-																		Title:
-																	</span>{" "}
-																	{rh?.title}{" "}
-																</h3>
-															</div>
-														))}
+													<h2 className="font-bold mb-2 mt-3">
+														{" "}
+														Research History:{" "}
+													</h2>
+													<div className="flex gap-1 flex-wrap">
+														{clg?.researchHistory &&
+															clg?.researchHistory.map((rh, z) => (
+																<span
+																	key={z}
+																	className="font-medium bg-slate-200  p-1 mr-2"
+																>
+																	{rh?.title}
+																</span>
+															))}
+													</div>
 												</div>
 
 												<div className="">
-													<h2 className="font-bold"> Sports: </h2>
+													<h2 className="font-bold mb-2 mt-3"> Sports: </h2>
 													{clg?.sports &&
 														clg?.sports.map((sp) => (
-															<div className="py-1 text-sm">
-																<h3>
-																	<span className="font-medium">Name: </span>
+															<>
+																<span className="font-medium bg-slate-200  p-1 mr-2">
 																	{sp?.name}
-																</h3>
-															</div>
+																</span>
+															</>
 														))}
 												</div>
 											</div>
-
-											<Link
-												to={`/three-college/${clg?._id}`}
-												className="w-full bg-blue-400 transition duration-300 py-2 text-center text-gray-800 mt-1 hover:bg-blue-600 hover:text-gray-200"
-											>
-												{" "}
-												Details{" "}
-											</Link>
 										</div>
+										<Link
+											to={`/three-college/${clg?._id}`}
+											className="w-full bg-blue-400 transition duration-300 py-2 text-center text-gray-800 hover:bg-blue-600 hover:text-gray-200 mt-6"
+										>
+											{" "}
+											Details{" "}
+										</Link>
 									</div>
 								);
 							})}

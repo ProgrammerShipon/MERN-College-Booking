@@ -6,29 +6,34 @@ const CollegeDetailsModal = ({ college, closeModal }) => {
 			className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-opacity-75 bg-gray-900"
 			onClick={closeModal}
 		>
-			<div className="max-w-md p-8 bg-white rounded-lg shadow-lg">
+			<div className="max-w-md p-8 bg-white rounded-lg shadow-lg h-[95vh] overflow-y-scroll">
 				<img
-					src={college.image}
-					alt={college.name}
+					src={college?.image}
+					alt={college?.name}
 					className="w-full h-48 object-cover mb-4"
 				/>
-				<div className="font-bold text-xl mb-2">{college.name}</div>
-				<p className="text-gray-700 text-base">Rating: {college.rating}</p>
+				<div className="font-bold text-xl mb-2">{college?.name}</div>
+				<p className="text-gray-700 text-base">Rating: {college?.rating}</p>
 				<p className="text-gray-700 text-base">
-					Admission Date: {college.admissionDate}
+					Admission Date: {college?.admissionDate}
 				</p>
 				<p className="text-gray-700 text-base">
-					Research Count: {college.researchNumber}
+					Research Count: {college?.research?.length}
 				</p>
+				<p className="text-gray-700 text-base">Location: {college?.location}</p>
+				<p className="text-gray-700 text-base">
+					Description: {college?.description}
+				</p>
+				<p className="text-gray-700 text-base">Type: {college?.type}</p>
 				<h3 className="font-bold mt-4">Events</h3>
 				<ul className="list-disc ml-6">
-					{college.events.map((event, index) => (
+					{college?.events.map((event, index) => (
 						<li key={index}>{event}</li>
 					))}
 				</ul>
 				<h3 className="font-bold mt-4">Sports Facilities</h3>
 				<ul className="list-disc ml-6">
-					{college.sportsFacilities.map((facility, index) => (
+					{college?.sportsFacilities.map((facility, index) => (
 						<li key={index}>{facility}</li>
 					))}
 				</ul>
