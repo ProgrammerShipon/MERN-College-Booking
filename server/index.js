@@ -31,7 +31,7 @@ const dbConnect = async () => {
 		client.connect();
 		console.log("Database Connected Successfully✅");
 	} catch (error) {
-		console.log(error.name, error.message);
+		console.log(error.message);
 	}
 };
 dbConnect();
@@ -40,9 +40,7 @@ dbConnect();
 const db = client.db("MERN-College-Booking");
 const threeCollege = db.collection("threeCollege");
 const colleges = db.collection("colleges");
-
-// Manual Data Insert JSON data
-// const data = [];
+const galleryImage = db.collection("galleryImage");
 
 // Insert the data into the database
 // const result = await threeCollege.insertMany(data);
@@ -50,7 +48,7 @@ const colleges = db.collection("colleges");
 // Server Running Home Route
 app.get("/", async (req, res) => {
 	res.send("<h1> Assalamualaikum </h2>");
-	// const result = await colleges.insertMany(data);
+	// const result = await galleryImage.insertMany(data);
 	// console.log(result);
 });
 
@@ -72,6 +70,12 @@ app.get("/three-college/:id", async (req, res) => {
 // all college
 app.get("/colleges", async (req, res) => {
 	const result = await colleges.find().toArray();
+	res.send(result);
+});
+
+// gallery image
+app.get("/gallery-image", async (req, res) => {
+	const result = await galleryImage.find().toArray();
 	res.send(result);
 });
 
