@@ -1,48 +1,57 @@
 import React, { useContext, useState } from "react";
-import { AuthContext } from "../../AuthProviders/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import { FaEye } from "react-icons/fa";
-import { toast } from "react-toastify";
+import useUserAuth from "../../hooks/useUserAuth";
+import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const Registration = ({ fm }) => {
 	const navigate = useNavigate();
-	const [error, setError] = useState(null);
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors },
+	} = useForm();
 	const [showPw, setShowPw] = useState(true);
 	const [disable, setDisable] = useState(true);
-	const { registrationUser } = useContext(AuthContext);
+	const {} = useUserAuth();
 
 	const registrationHandle = (event) => {
-		event.preventDefault();
+		// event.preventDefault();
 
-		const form = event.target;
-		const name = form.fullName.value;
-		const email = form.email.value;
-		const photoUrl = form.photoUrl.value;
-		const password = form.M_password.value;
+		// const form = event.target;
+		// const name = form.fullName.value;
+		// const email = form.email.value;
+		// const photoUrl = form.photoUrl.value;
+		// const password = form.M_password.value;
 
-		if (password.length < 6) {
-			toast(`The Password is less than 6 characters ${password.length} `);
-			return;
-		}
+		console.log("events -> ", event);
+		console.log("errors -> ", errors);
 
-		registrationUser(email, password)
-			.then((result) => {
-				toast("Account Create Success");
+		// if (password.length < 6) {
+		// 	toast(`The Password is less than 6 characters ${password.length} `);
+		// 	return;
+		// }
 
-				const logUer = result.user;
-				const newUserData = {
-					displayName: name,
-					photoURL: photoUrl || null,
-				};
+		// registrationUser(email, password)
+		// 	.then((result) => {
+		// 		toast("Account Create Success");
 
-				updateProfile(logUer, newUserData);
+		// 		const logUer = result.user;
+		// 		const newUserData = {
+		// 			displayName: name,
+		// 			photoURL: photoUrl || null,
+		// 		};
 
-				navigate("/");
+		// 		updateProfile(logUer, newUserData);
 
-				form.reset();
-			})
-			.catch();
+		// 		navigate("/");
+
+		// 		form.reset();
+		// 	})
+		// 	.catch();
 	};
 
 	return (
@@ -64,7 +73,10 @@ const Registration = ({ fm }) => {
 
 			<div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
 				<div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-					<form onSubmit={registrationHandle} className="space-y-6">
+					<form
+						onSubmit={handleSubmit(registrationHandle)}
+						className="space-y-6"
+					>
 						<div>
 							<label
 								htmlFor="fullName"
@@ -74,6 +86,7 @@ const Registration = ({ fm }) => {
 							</label>
 							<div className="mt-1">
 								<input
+									{...register("fullName", { required: true })}
 									id="fullName"
 									name="fullName"
 									type="text"
@@ -93,6 +106,7 @@ const Registration = ({ fm }) => {
 							</label>
 							<div className="mt-1">
 								<input
+									{...register("email", { required: true })}
 									id="email"
 									name="email"
 									type="email"
@@ -112,6 +126,7 @@ const Registration = ({ fm }) => {
 							</label>
 							<div className="mt-1">
 								<input
+									{...register("photoUrl", { required: true })}
 									id="photoUrl"
 									name="photoUrl"
 									type="text"
@@ -130,10 +145,9 @@ const Registration = ({ fm }) => {
 							</label>
 							<div className="mt-1 relative">
 								<input
+									{...register("password", { required: true })}
 									id="password"
-									name="M_password"
 									type={showPw ? "password" : "text"}
-									autoComplete="current-password"
 									required
 									className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 								/>
@@ -173,8 +187,8 @@ const Registration = ({ fm }) => {
 
 						<div>
 							<button
-								disabled={disable ? true : false}
 								type="submit"
+								disabled={disable ? true : false}
 								className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
 									disable
 										? "bg-indigo-400 hover:bg-indigo-400"

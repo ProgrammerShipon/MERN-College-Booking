@@ -10,6 +10,7 @@ import NotFoundPage from "../Pages/ErrorPage/404";
 import TDetails from "../Pages/Home/ThreeClg/TDetails";
 import useAxiosCall from "../hooks/useAxiosCall";
 import AdmissionFrom from "../Pages/Admission/AdmissionFrom";
+import Registration from "../Pages/Joining/Registration";
 
 const Route = createBrowserRouter([
 	{
@@ -36,6 +37,10 @@ const Route = createBrowserRouter([
 			{
 				path: "/login",
 				element: <Login />,
+			},
+			{
+				path: "/registration",
+				element: <Registration />,
 			},
 			{
 				path: "/profile",

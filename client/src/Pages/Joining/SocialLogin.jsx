@@ -4,16 +4,71 @@ import { FaGithub } from "react-icons/fa6";
 import { toast } from "react-hot-toast";
 import useUserAuth from "../../hooks/useUserAuth";
 import { FaGoogle } from "react-icons/fa";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
 	const [isError, setError] = useState("");
-	const { user, authLoading, googleLogin, githubLogin } = useUserAuth();
+	const {
+		user,
+		authLoading,
+		googleLogin,
+		githubLogin,
+		signUp,
+		updateUserProfile,
+		logOut,
+		signIn,
+	} = useUserAuth();
+	const navigate = useNavigate();
+	const location = useLocation();
+
+	const from = location.state?.from?.pathname || "/profile";
+
+	const saveDatabase = (result) => {
+		console.log("saveDatabase -> ", result);
+		const { displayName, email, photoURL, phoneNumber } = result;
+		const saveDate = {
+			displayName,
+			email,
+			photoURL,
+			phoneNumber,
+			education: [],
+			address: null,
+			gender: null,
+			about: null,
+		};
+
+		console.log("saveDatabase saveDate -> ", saveDate);
+
+		fetch("http://localhost:6060/users", {
+			method: "POST",
+			headers: {
+				"content-type": "application/json",
+			},
+			body: JSON.stringify(saveDate),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+				if (data?.insertedId) {
+					toast.success("Sign Up Success");
+				} else {
+					toast.success("Login Success");
+				}
+
+				setError(null);
+				navigate(from, { replace: true });
+			})
+			.catch((err) => console.log(err));
+	};
 
 	const googleHandle = () => {
 		googleLogin()
 			.then((result) => {
-				toast("Google Login Success");
-				navigate(from, { replace: true });
+				console.log("Google login -> ", result);
+
+				saveDatabase(result?.user);
+
+				// navigate(from, { replace: true });
 			})
 			.catch((error) => {
 				setError(error.message);
@@ -21,10 +76,13 @@ const SocialLogin = () => {
 	};
 
 	const githubHandle = () => {
+		console.log("Github Handle");
 		githubLogin()
 			.then((result) => {
-				toast("Github Login Success");
-				navigate(from, { replace: true });
+				console.log("Github login -> ", result);
+				// navigate(from, { replace: true });
+
+				saveDatabase(result?.user);
 			})
 			.catch((error) => {
 				setError(error.message);

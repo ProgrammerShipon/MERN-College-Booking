@@ -9,22 +9,10 @@ const Header = () => {
 	const menuRef = useRef(null);
 	const { authLoading, user, logOut } = useUserAuth();
 	const navData = [
-		{
-			path: "/",
-			name: "Home",
-		},
-		{
-			path: "/colleges",
-			name: "Colleges",
-		},
-		{
-			path: "/admission",
-			name: "Admission",
-		},
-		{
-			path: "/my-college",
-			name: "My College",
-		},
+		{ path: "/", name: "Home" },
+		{ path: "/colleges", name: "Colleges" },
+		{ path: "/admission", name: "Admission" },
+		{ path: "/my-college", name: "My College" },
 	];
 	const navItems = (
 		<>
@@ -58,7 +46,6 @@ const Header = () => {
 		setIsOpen(!isOpen);
 	};
 
-	console.log("User -> ", user);
 	useEffect(() => {
 		const handleOutsideClick = (event) => {
 			if (menuRef.current && !menuRef.current.contains(event.target)) {
