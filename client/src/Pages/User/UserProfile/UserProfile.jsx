@@ -17,15 +17,17 @@ const UserProfile = () => {
 	} = useForm();
 
 	const profileUpdateFc = (profileID, profileData) => {
-		const sendData = { ...profileData };
-
+		const sendData = { ...profileData, email: profileUserData?.email };
 		console.log("profile id -> ", profileID, sendData);
 
-		fetch(`http://localhost:6060/profile-updates/${profileID}`, {
-			method: "PATCH",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(sendData),
-		})
+		fetch(
+			`https://college-booking-programmershipon.vercel.app/profile-updates/${profileID}`,
+			{
+				method: "PATCH",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(sendData),
+			}
+		)
 			.then((res) => res.json())
 			.then((data) => {
 				console.log("Update Data -> ", data);
@@ -43,7 +45,7 @@ const UserProfile = () => {
 		console.log(errors);
 
 		if (data) {
-			// profileUpdateFc(profileUserData?._id, data);
+			profileUpdateFc(profileUserData?._id, data);
 		}
 	};
 
@@ -100,8 +102,8 @@ const UserProfile = () => {
 											/>
 
 											<input
-												{...register("email", { required: true })}
-												defaultValue={profileUserData?.email}
+												{...register("email", { required: false })}
+												value={profileUserData?.email}
 												disabled
 												placeholder="Your Email..."
 												className={inputStyle + "select-none"}
@@ -136,14 +138,20 @@ const UserProfile = () => {
 											/>
 
 											<input
+												{...register("dateOfBirth", { required: true })}
+												defaultValue={profileUserData?.dateOfBirth}
+												type="date"
+												placeholder="Date Of Birth"
+												className={inputStyle}
+											/>
+
+											<input
 												{...register("gender", { required: true })}
 												defaultValue={profileUserData?.gender}
 												placeholder="Gender - Male or Female"
 												className={inputStyle}
 											/>
 										</div>
-
-										{errors && <span>This field is required</span>}
 
 										<input
 											type="submit"
@@ -152,8 +160,8 @@ const UserProfile = () => {
 										/>
 									</form>
 								) : (
-									<div className="pb-7">
-										<div>
+									<div className="pb-2">
+										<div className="space-y-1">
 											<p>
 												His/Her,
 												<span className="font-semibold">
@@ -163,27 +171,45 @@ const UserProfile = () => {
 														?.join(" ")}
 												</span>
 											</p>
-											<h3 className="text-2xl font-semibold">
+											<h3 className="text-2xl font-semibold py-2">
 												{" "}
 												{profileUserData?.displayName}{" "}
 											</h3>
-											<p>
+											<p className="border-t py-2">
 												{" "}
 												{profileUserData?.about ||
 													"Write a About Your Self"}{" "}
 											</p>
 										</div>
-										<div className="border-t">
+										<div className="border-t py-2">
 											<p> {profileUserData?.email || "Your Email "}</p>
 											<p>
 												{" "}
 												{profileUserData?.phoneNumber || "Your Contact Number"}
 											</p>
 										</div>
-										<div className="border-t">
-											<p> {profileUserData?.address || "set Your Location "}</p>
-											<p> {profileUserData?.gender || "Set Your Gender"} </p>
-											<p>{profileUserData?.education || "Set Your College"}</p>
+										<div className="border-t text-left py-2">
+											<p>
+												<span className="font-semibold "> Location : </span>
+												{profileUserData?.address || "set Your Location "}{" "}
+											</p>
+											<p>
+												{" "}
+												<span className="font-semibold "> Gender : </span>{" "}
+												{profileUserData?.gender || "Set Your Gender"}{" "}
+											</p>
+											<p>
+												<span className="font-semibold "> College : </span>
+												{profileUserData?.education || "Set Your College"}{" "}
+											</p>
+											<p>
+												<span className="font-semibold ">
+													{" "}
+													Date Of Birth :{" "}
+												</span>
+												{profileUserData?.dateOfBirth ||
+													"Set Your College"}{" "}
+											</p>
 										</div>
 									</div>
 								)}

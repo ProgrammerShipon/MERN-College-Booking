@@ -24120,7 +24120,7 @@ Be.HttpStatusCode = ok;
 Be.default = Be;
 const sk = Be,
 	ak = sk.create({
-		baseURL: "http://localhost:6060/",
+		baseURL: "https://college-booking-programmershipon.vercel.app/",
 	}),
 	dv = () => ({ axiosCall: ak }),
 	lk = () => {

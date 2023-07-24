@@ -40,7 +40,7 @@ const SocialLogin = () => {
 
 		console.log("saveDatabase saveDate -> ", saveDate);
 
-		fetch("http://localhost:6060/users", {
+		fetch("https://college-booking-programmershipon.vercel.app/users", {
 			method: "POST",
 			headers: {
 				"content-type": "application/json",

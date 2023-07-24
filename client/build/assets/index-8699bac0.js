@@ -21882,13 +21882,11 @@ class gC extends go {
 		if (
 			((this.options = this.client.defaultQueryOptions(t)),
 			Rp(r, this.options) ||
-				this.client
-					.getQueryCache()
-					.notify({
-						type: "observerOptionsUpdated",
-						query: this.currentQuery,
-						observer: this,
-					}),
+				this.client.getQueryCache().notify({
+					type: "observerOptionsUpdated",
+					query: this.currentQuery,
+					observer: this,
+				}),
 			typeof this.options.enabled < "u" &&
 				typeof this.options.enabled != "boolean")
 		)
@@ -22196,12 +22194,10 @@ class gC extends go {
 					d(this.currentResult);
 				}),
 				t.cache &&
-					this.client
-						.getQueryCache()
-						.notify({
-							query: this.currentQuery,
-							type: "observerResultsUpdated",
-						});
+					this.client.getQueryCache().notify({
+						query: this.currentQuery,
+						type: "observerResultsUpdated",
+					});
 		});
 	}
 }
@@ -25615,7 +25611,7 @@ const mN = () => {
 					about: null,
 				};
 			console.log("saveDatabase saveDate -> ", P),
-				fetch("http://localhost:6060/users", {
+				fetch("https://college-booking-programmershipon.vercel.app/users", {
 					method: "POST",
 					headers: { "content-type": "application/json" },
 					body: JSON.stringify(P),
@@ -28263,7 +28259,9 @@ const UN = () => {
 					path: "/three-college/:id",
 					loader: ({ params: e }) =>
 						fetch(
-							`http://localhost:6060/three-college/${e == null ? void 0 : e.id}`
+							`https://college-booking-programmershipon.vercel.app/three-college/${
+								e == null ? void 0 : e.id
+							}`
 						),
 					element: c.jsx(KN, {}),
 				},
@@ -28271,7 +28269,7 @@ const UN = () => {
 					path: "/admission/:id",
 					loader: ({ params: e }) =>
 						fetch(
-							`http://localhost:6060/admission-form/${
+							`https://college-booking-programmershipon.vercel.app/admission-form/${
 								e == null ? void 0 : e.id
 							}`
 						),
