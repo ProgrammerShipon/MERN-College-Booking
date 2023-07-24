@@ -11,7 +11,7 @@ const Header = () => {
 	const navData = [
 		{ path: "/", name: "Home" },
 		{ path: "/colleges", name: "Colleges" },
-		{ path: "/admission", name: "Admission" },
+		// { path: "/admission", name: "Admission" },
 		{ path: "/my-college", name: "My College" },
 	];
 	const navItems = (

@@ -21830,13 +21830,11 @@ class mb extends Go {
 		if (
 			((this.options = this.client.defaultQueryOptions(e)),
 			Hh(r, this.options) ||
-				this.client
-					.getQueryCache()
-					.notify({
-						type: "observerOptionsUpdated",
-						query: this.currentQuery,
-						observer: this,
-					}),
+				this.client.getQueryCache().notify({
+					type: "observerOptionsUpdated",
+					query: this.currentQuery,
+					observer: this,
+				}),
 			typeof this.options.enabled < "u" &&
 				typeof this.options.enabled != "boolean")
 		)
@@ -22144,12 +22142,10 @@ class mb extends Go {
 					c(this.currentResult);
 				}),
 				e.cache &&
-					this.client
-						.getQueryCache()
-						.notify({
-							query: this.currentQuery,
-							type: "observerResultsUpdated",
-						});
+					this.client.getQueryCache().notify({
+						query: this.currentQuery,
+						type: "observerResultsUpdated",
+					});
 		});
 	}
 }
@@ -24123,7 +24119,9 @@ Be.formToJSON = (t) => sv(N.isHTMLForm(t) ? new FormData(t) : t);
 Be.HttpStatusCode = ok;
 Be.default = Be;
 const sk = Be,
-	ak = sk.create({ baseURL: "http://localhost:6060/" }),
+	ak = sk.create({
+		baseURL: "http://localhost:6060/",
+	}),
 	dv = () => ({ axiosCall: ak }),
 	lk = () => {
 		const { axiosCall: t } = dv(),
@@ -25909,7 +25907,9 @@ const lR = () =>
 					path: "/three-college/:id",
 					loader: ({ params: t }) =>
 						fetch(
-							`http://localhost:6060/three-college/${t == null ? void 0 : t.id}`
+							`https://college-booking-programmershipon.vercel.app/three-college/${
+								t == null ? void 0 : t.id
+							}`
 						),
 					element: h.jsx(gR, {}),
 				},

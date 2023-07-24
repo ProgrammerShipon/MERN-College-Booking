@@ -14,7 +14,7 @@ const UserProfile = () => {
 		handleSubmit,
 		watch,
 		formState: { errors },
-	} = useForm({ ...profileUserData });
+	} = useForm();
 
 	const profileUpdateFc = (profileID, profileData) => {
 		const sendData = { ...profileData };
@@ -43,11 +43,13 @@ const UserProfile = () => {
 		console.log(errors);
 
 		if (data) {
-			profileUpdateFc(profileUserData?._id, data);
+			// profileUpdateFc(profileUserData?._id, data);
 		}
 	};
 
 	// console.log(errors);
+
+	console.log("running", profileUserData);
 
 	const inputStyle =
 		"appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm my-2";
@@ -67,7 +69,6 @@ const UserProfile = () => {
 								<FiEdit className="w-6 h-6" />
 							)}
 						</button>
-
 						<div className="px-6 py-7">
 							<div className="flex flex-wrap justify-center mt-6">
 								<div className="w-full px-4 flex justify-center">
@@ -142,18 +143,26 @@ const UserProfile = () => {
 											/>
 										</div>
 
-										{errors.exampleRequired && (
-											<span>This field is required</span>
-										)}
+										{errors && <span>This field is required</span>}
 
 										<input
 											type="submit"
+											value="Save"
 											className="absolute left-4 top-4 cursor-pointer transition duration-300 bg-green-100 hover:bg-green-300 p-2 rounded hover:shadow-md"
 										/>
 									</form>
 								) : (
 									<div className="pb-7">
 										<div>
+											<p>
+												His/Her,
+												<span className="font-semibold">
+													{profileUserData?.displayName
+														?.split(" ")
+														?.slice(0, 2)
+														?.join(" ")}
+												</span>
+											</p>
 											<h3 className="text-2xl font-semibold">
 												{" "}
 												{profileUserData?.displayName}{" "}
@@ -164,7 +173,6 @@ const UserProfile = () => {
 													"Write a About Your Self"}{" "}
 											</p>
 										</div>
-
 										<div className="border-t">
 											<p> {profileUserData?.email || "Your Email "}</p>
 											<p>
@@ -172,7 +180,6 @@ const UserProfile = () => {
 												{profileUserData?.phoneNumber || "Your Contact Number"}
 											</p>
 										</div>
-
 										<div className="border-t">
 											<p> {profileUserData?.address || "set Your Location "}</p>
 											<p> {profileUserData?.gender || "Set Your Gender"} </p>

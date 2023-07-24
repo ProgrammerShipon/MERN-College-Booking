@@ -35,6 +35,7 @@ const SocialLogin = () => {
 			address: null,
 			gender: null,
 			about: null,
+			dateOfBirth: null,
 		};
 
 		console.log("saveDatabase saveDate -> ", saveDate);

@@ -5,3 +5,8 @@
 .mc {
 	@apply container mx-auto;
 }
+
+/* Active Route */
+nav a.active {
+	@apply text-blue-600;
+}
