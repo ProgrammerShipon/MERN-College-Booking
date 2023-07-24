@@ -10,7 +10,7 @@ const Froms = ({ clg }) => {
 		formState: { errors },
 	} = useForm();
 
-	const handleSubmitForm = (data) => {
+	const onSubmit = (data) => {
 		console.log(clg);
 		const candidate = {
 			...data,
@@ -23,7 +23,7 @@ const Froms = ({ clg }) => {
 		<>
 			<form
 				className="max-w-md mx-auto bg-white p-5 rounded-lg shadow-md"
-				onSubmit={handleSubmit(handleSubmitForm)}
+				onSubmit={handleSubmit(onSubmit)}
 			>
 				<div className="mb-4">
 					<label
@@ -35,7 +35,6 @@ const Froms = ({ clg }) => {
 					<input
 						{...register("CandidateName", { required: true })}
 						defaultValue={user?.displayName}
-						disabled
 						className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 						id="candidateName"
 						type="text"
@@ -51,9 +50,8 @@ const Froms = ({ clg }) => {
 						Candidate Email
 					</label>
 					<input
-						{...register("CandidateEmail", { required: true })}
+						{...register("CandidateEmail", { required: false })}
 						defaultValue={user?.email}
-						disabled
 						className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 						id="candidateEmail"
 						type="email"

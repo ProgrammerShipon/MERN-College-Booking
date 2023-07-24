@@ -24120,7 +24120,7 @@ Be.HttpStatusCode = ok;
 Be.default = Be;
 const sk = Be,
 	ak = sk.create({
-		baseURL: "https://college-booking-programmershipon.vercel.app/",
+		baseURL: "http://localhost:6060/",
 	}),
 	dv = () => ({ axiosCall: ak }),
 	lk = () => {
@@ -25907,9 +25907,7 @@ const lR = () =>
 					path: "/three-college/:id",
 					loader: ({ params: t }) =>
 						fetch(
-							`https://college-booking-programmershipon.vercel.app/three-college/${
-								t == null ? void 0 : t.id
-							}`
+							`http://localhost:6060/three-college/${t == null ? void 0 : t.id}`
 						),
 					element: h.jsx(gR, {}),
 				},

@@ -24172,7 +24172,7 @@ tt.HttpStatusCode = aR;
 tt.default = tt;
 const lR = tt,
 	uR = lR.create({
-		baseURL: "https://college-booking-programmershipon.vercel.app/",
+		baseURL: "http://localhost:6060/",
 	}),
 	Xi = () => ({ axiosCall: uR }),
 	cR = () => {
@@ -25611,7 +25611,7 @@ const mN = () => {
 					about: null,
 				};
 			console.log("saveDatabase saveDate -> ", P),
-				fetch("https://college-booking-programmershipon.vercel.app/users", {
+				fetch("http://localhost:6060/users", {
 					method: "POST",
 					headers: { "content-type": "application/json" },
 					body: JSON.stringify(P),
@@ -28259,9 +28259,7 @@ const UN = () => {
 					path: "/three-college/:id",
 					loader: ({ params: e }) =>
 						fetch(
-							`https://college-booking-programmershipon.vercel.app/three-college/${
-								e == null ? void 0 : e.id
-							}`
+							`http://localhost:6060/three-college/${e == null ? void 0 : e.id}`
 						),
 					element: c.jsx(KN, {}),
 				},
@@ -28269,7 +28267,7 @@ const UN = () => {
 					path: "/admission/:id",
 					loader: ({ params: e }) =>
 						fetch(
-							`https://college-booking-programmershipon.vercel.app/admission-form/${
+							`http://localhost:6060/admission-form/${
 								e == null ? void 0 : e.id
 							}`
 						),

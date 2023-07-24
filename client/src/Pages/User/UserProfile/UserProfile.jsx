@@ -21,7 +21,7 @@ const UserProfile = () => {
 		console.log("profile id -> ", profileID, sendData);
 
 		fetch(
-			`https://college-booking-programmershipon.vercel.app/profile-updates/${profileID}`,
+			`http://localhost:6060/profile-updates/${profileID}`,
 			{
 				method: "PATCH",
 				headers: { "Content-Type": "application/json" },
